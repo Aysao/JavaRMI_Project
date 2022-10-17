@@ -1,13 +1,16 @@
+import server.IBagOfTask;
+import server.ICompte;
+
 import java.io.*;
 import java.rmi.*;
 public class Client {
     public static void main(String args[])
     {
-        ActionCompte srv = null;
+        IBagOfTask srv = null;
 
 
         try{
-            srv = (ActionCompte)Naming.lookup("serveurcompte");
+            srv = (IBagOfTask) Naming.lookup("serveurcompte");
         }catch(Exception e)
         {
             System.err.println("Erreur, impossible de trouver le serveur | " + e);

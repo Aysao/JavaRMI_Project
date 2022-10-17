@@ -1,10 +1,6 @@
-import java.rmi.server.*;
+package server;
+
 import java.rmi.*;
-import java.util.HashMap;
-import java.sql.*;
-
-
-
 
 public class Serveur
 {
@@ -12,7 +8,7 @@ public class Serveur
     public static void main(String[] args)
     {
         try{
-            ActionCompteImpl srv = new ActionCompteImpl();
+            IBagOfTask srv = new BagOfTask();
             String nom = "serveurcompte";
             Naming.rebind(nom, srv);
             System.out.println("--- serveur enregistré ---");
