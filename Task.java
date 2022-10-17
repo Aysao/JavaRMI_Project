@@ -1,4 +1,4 @@
-public class Task {
+public class Task implements ITask{
     private boolean result;
     private int number;
 

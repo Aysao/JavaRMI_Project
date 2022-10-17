@@ -1,8 +1,11 @@
 import java.util.ArrayDeque;
 import java.util.Queue;
+import java.rmi.*;
 
-public interface BagOfTAsk extends Remote{
+public class BagOfTask{
     private Queue<ITask> queue;
+    private int currentN = 0;
+    private boolean[] tab;
 
     public BagOfTask(int N)
     {
@@ -18,7 +21,6 @@ public interface BagOfTAsk extends Remote{
     public void sendResult(ITask t)
     {
         Task task = (Task)t;
-        tab[task.getNumber()] = task.isPrimary();
     }
 
     public int getSize()
