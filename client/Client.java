@@ -4,6 +4,22 @@ import server.ICompte;
 import java.io.*;
 import java.rmi.*;
 public class Client {
+
+    public Compte getCompte(int id) throws RemoteException {
+        if (liste.get(id) == null) {
+            System.out.println("Création de compte ... ");
+            liste.put(id, new Compte());
+            try {
+                Statement statement = connexionPool.getConnection();
+                ResultSet resultSet = statement.executeQuery("INSERT INTO COMPTE(id, SOLDE) VALUES (" + id + ", 0)");
+                connexionPool.setConnection(statement);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return liste.get(id);
+    }
+    
     public static void main(String args[])
     {
         IBagOfTask srv = null;

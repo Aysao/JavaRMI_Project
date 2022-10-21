@@ -25,3 +25,14 @@ Compiler le serveur: `ant server-jar`
 Lancer le serveur: `ant run-server`
 
 Lancer le client: `ant run-client`
+
+Client : génère task avec code SQL, l'envoie au bag of tasks
+BOT : Affecte une connection à la tâche et la met dans la liste des taches à faire
+Worker: Récupère la tâche et l'exécute
+Worker: renvoie un message au bag of task ? ou au client direct ?
+
+
+[ ] Refonte du client
+[ ] Vérifier commandes client bag of tasks*
+[ ] refaire le worker
+[ ] sortir un jeu de test

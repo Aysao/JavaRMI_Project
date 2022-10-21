@@ -4,5 +4,10 @@ package server;
 
 public interface ITask {
     public void execute();
-    public String getResult();
+
+    public ResultSet getResult();
+
+    public void setConnection(Statement s);
+
+    public Statement getConnection();
 }

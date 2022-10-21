@@ -8,69 +8,46 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
 
-
-public class BagOfTask extends UnicastRemoteObject implements IBagOfTask{
-    private HashMap<Integer, Compte> liste;
-    private ConnexionPool connexionPool;
+public class BagOfTask extends UnicastRemoteObject implements IBagOfTask {
     private Deque<ITask> tasks;
-    private Deque<ITask> results;
+    private Deque<ITask> results;private const
+    int MAX_CONNECTIONS = 10;
+    private int nConnections = 0;
+    private Deque<Statement> connexionPool;
 
-    public BagOfTask() throws RemoteException
-    {
+    public BagOfTask() throws RemoteException {
         super();
 
         this.tasks = new ArrayDeque<ITask>();
         this.results = new ArrayDeque<ITask>();
-        liste = new  HashMap<Integer, Compte>();
-        connexionPool = new ConnexionPool();
-        try{
-            Statement statement = connexionPool.getConnection();
-            ResultSet resultSet =  statement.executeQuery("SELECT * FROM COMPTE");
-            while(resultSet.next()) {
-                int id = resultSet.getInt("id");
-                int solde = resultSet.getInt("SOLDE");
-                System.out.println("id= " + id + "; solde= " + solde);
-                liste.put(id, new Compte(solde));
+        liste = new HashMap<Integer, Compte>();
+        this.connexionPool = new ArrayDeque<Statement>();
+
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection con = DriverManager.getConnection("jdbc:oracle:thin:@eluard:1521:ense2022", "mj662957",
+                    "mj662957");
+            for (int i = 0; i < nmax; i++) {
+                connexionQueue.add(con.createStatement());
             }
-            connexionPool.setConnection(statement);
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public Compte getCompte(int id) throws RemoteException
-    {
-        if (liste.get(id) == null)
-        {
-            System.out.println("Création de compte ... ");
-            liste.put(id, new Compte());
-            try {
-                Statement statement = connexionPool.getConnection();
-                ResultSet resultSet =  statement.executeQuery("INSERT INTO COMPTE(id, SOLDE) VALUES ("+id+", 0)");
-                connexionPool.setConnection(statement);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return liste.get(id);
-    }
-
     public void submitTask(ITask t) throws RemoteException {
+        t.setConnection(connexionPool.pop());
         tasks.addLast(t);
         System.out.println("added task. length = " + tasks.size());
     }
 
     public ITask getNext() {
-
         System.out.println("task sent to worker");
         return tasks.pop();
     }
 
     public void giveResult(ITask t) throws RemoteException {
+        connexionPool.add(t.getConnection());
         results.addLast(t);
-
-        System.out.println("total: " + results.size());
     }
 }
