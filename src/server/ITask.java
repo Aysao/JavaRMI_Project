@@ -13,4 +13,7 @@ public interface ITask {
     public void setConnection(Statement s);
 
     public Statement getConnection();
+
+    public void setID(int ID);
+    public int getID();
 }

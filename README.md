@@ -27,12 +27,14 @@ Lancer le serveur: `ant run-src.server`
 Lancer le src.client: `ant run-src.client`
 
 Client : génère task avec code SQL, l'envoie au bag of tasks
+BOT : génère un identifiant de tâche, l'affecte à la tâche et le retourne au client
 BOT : Affecte une connection à la tâche et la met dans la liste des taches à faire
+BOT : si pas de connection disponible, mettre la tâche dans une liste d'attente.
 Worker: Récupère la tâche et l'exécute
-Worker: renvoie un message au bag of task ? ou au src.client direct ?
+Worker: renvoie un message au bag of task ? ou au client direct ?
 
 
-[ ] Refonte du src.client
-[ ] Vérifier commandes src.client bag of tasks*
-[ ] refaire le worker
+[ ] Refonte du client
+[x] Vérifier commandes client bag of tasks
+[x] refaire le worker
 [ ] sortir un jeu de test

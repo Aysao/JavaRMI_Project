@@ -9,6 +9,7 @@ public class Task implements ITask {
     private String SQL;
     private Statement connection;
     private ResultSet resultat;
+    private int ID;
 
     public Task(String SQL) {
         this.SQL = SQL;
@@ -17,6 +18,9 @@ public class Task implements ITask {
     public void setConnection(Statement s) {
         this.connection = s;
     }
+
+    public void setID(int ID) { this.ID = ID;}
+    public int getID() {return this.ID;}
 
     public Statement getConnection() {
         try {

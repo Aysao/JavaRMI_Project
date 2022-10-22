@@ -4,13 +4,14 @@ import java.rmi.*;
 import java.sql.ResultSet;
 
 public interface IBagOfTask extends Remote {
-    // commandes src.client
-    public void submitTask(ITask t) throws RemoteException;
-
-    public ResultSet getResult(ITask t) throws RemoteException;
+    // commandes client
+    int submitTask(ITask t) throws RemoteException;
+    ResultSet getResult(int ID) throws RemoteException;
 
     // Commandes Worker
-    public ITask getNext() throws RemoteException;
+    ITask getNext() throws RemoteException;
 
-    public void giveResult(ITask t) throws RemoteException;
+    void giveResult(ITask t) throws RemoteException;
+
+    boolean hasTaskAvailable() throws RemoteException;
 }

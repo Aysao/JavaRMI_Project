@@ -10,24 +10,49 @@
 package server;
 import java.rmi.Naming;
 
-public class Worker {
-    public static void main(String[] args) {
-        IBagOfTask bot = null;
+import static server.Serveur.SRV_NAME;
+
+public class Worker extends Thread{
+    IBagOfTask bot = null;
+    public Worker() {
         try {
-            bot = (IBagOfTask) Naming.lookup("serveurcompte");
-            for (int i = 0; i < 2; i++) {
-                System.out.println("index: " + i);
-                ITask t = bot.getNext();
-                System.out.println("got task");
-                t.execute();
-                System.out.println("executed task");
-                bot.giveResult(t);
-                System.out.println("callback done");
-            }
+            this.bot = (IBagOfTask) Naming.lookup(SRV_NAME);
         }
         catch(Exception e) {
-            System.err.println("Erreur: " + e.getLocalizedMessage());
-            System.exit(1);
+            e.printStackTrace();
         }
+        System.out.println("--- Worker active ---");
+    }
+
+    public void run() {
+        if (this.bot != null) {
+            while(true) {
+                try {
+                    if (this.bot.hasTaskAvailable()) {
+                        ITask t = bot.getNext();
+                        if (t != null) {
+                            System.out.println("got task: " + t.getID());
+                            t.execute();
+                            System.out.println("executed task");
+                            bot.giveResult(t);
+                            System.out.println("callback sent");
+                        }
+                    }
+                    else {
+                        System.out.println("Awaiting server");
+                        sleep(500);
+                    }
+                }catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        else {
+            System.out.println("Bag of Task is null ???");
+        }
+    }
+    public static void main(String[] args) {
+        Worker w = new Worker();
+        w.start();
     }
 }

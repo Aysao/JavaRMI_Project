@@ -8,18 +8,21 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.HashMap;
 
-public class BagOfTask extends UnicastRemoteObject implements IBagOfTask {
+public class    BagOfTask extends UnicastRemoteObject implements IBagOfTask {
     private Deque<ITask> tasks;
-    private Deque<ITask> results;
+    private Deque<ITask> waitingConnection;
+    private HashMap<Integer, ResultSet> results;
     private final int MAX_CONNECTIONS = 10;
     private Deque<Statement> connexionPool;
+    private volatile int taskCounter = 0;
 
     public BagOfTask() throws RemoteException {
         super();
 
         this.tasks = new ArrayDeque<ITask>();
-        this.results = new ArrayDeque<ITask>();
+        this.results = new HashMap<Integer, ResultSet>();
         this.connexionPool = new ArrayDeque<Statement>();
 
         try {
@@ -34,15 +37,27 @@ public class BagOfTask extends UnicastRemoteObject implements IBagOfTask {
         }
     }
 
-    public void submitTask(ITask t) throws RemoteException {
-        t.setConnection(connexionPool.pop());
-        tasks.addLast(t);
-        System.out.println("added task. length = " + tasks.size());
+    public int submitTask(ITask t) throws RemoteException {
+        taskCounter++;
+        if (connexionPool.isEmpty()) {
+            t.setID(taskCounter);
+            waitingConnection.addLast(t);
+            System.out.println("task waiting for connection. in waiting queue: " + waitingConnection.size());
+        }
+        else {
+            t.setConnection(connexionPool.pop());
+            t.setID(taskCounter);
+            tasks.addLast(t);
+            System.out.println("added task. in queue: " + tasks.size());
+        }
+        return taskCounter;
     }
 
     @Override
-    public ResultSet getResult(ITask t) throws RemoteException {
-        return null;
+    public ResultSet getResult(int ID) throws RemoteException {
+        ResultSet out = this.results.get(ID);
+        this.results.remove(ID);
+        return out;
     }
 
     public ITask getNext() {
@@ -50,8 +65,17 @@ public class BagOfTask extends UnicastRemoteObject implements IBagOfTask {
         return tasks.pop();
     }
 
+    public boolean hasTaskAvailable() {
+        return !tasks.isEmpty();
+    }
+
     public void giveResult(ITask t) throws RemoteException {
         connexionPool.add(t.getConnection());
-        results.addLast(t);
+        if (!waitingConnection.isEmpty()) {
+            ITask toTransfer = waitingConnection.getFirst();
+            toTransfer.setConnection(connexionPool.getFirst());
+            tasks.addLast(toTransfer);
+        }
+        results.put(t.getID(), t.getResult());
     }
 }
