@@ -1,6 +1,7 @@
 package server;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 //TODO: faire l'implémentation de ITask
@@ -18,12 +19,21 @@ public class Task implements ITask {
     }
 
     public Statement getConnection() {
-        this.connection.clearBatch();
+        try {
+            this.connection.clearBatch();
+        }
+        catch(Exception e) {
+            System.err.println(e);
+        }
         return this.connection;
     }
 
     public void execute() {
-        this.resultat = this.connection.executeQuery(this.SQL);
+        try {
+            this.resultat = this.connection.executeQuery(this.SQL);
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
     }
 
     public ResultSet getResult() {

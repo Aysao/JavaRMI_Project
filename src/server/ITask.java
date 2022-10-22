@@ -2,6 +2,9 @@
 
 package server;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 public interface ITask {
     public void execute();
 

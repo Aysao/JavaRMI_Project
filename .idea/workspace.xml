@@ -2,8 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c57a550c-2a81-4577-a461-f793652ffc96" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaRMI_Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaRMI_Project.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/BagOfTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/BagOfTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Compte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/ConnexionPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ConnexionPool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/IBagOfTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/IBagOfTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/ICompte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ICompte.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/ITask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ITask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Serveur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Serveur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Worker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +47,9 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
@@ -47,6 +63,8 @@
       <updated>1666042021550</updated>
       <workItem from="1666042022845" duration="803000" />
       <workItem from="1666042995542" duration="542000" />
+      <workItem from="1666433761784" duration="1360000" />
+      <workItem from="1666435131815" duration="320000" />
     </task>
     <servers />
   </component>

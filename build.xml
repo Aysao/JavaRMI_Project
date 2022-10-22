@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="BagOfTasks" basedir=".">
+    <property name="src_dir" value="src" />
+    <property name="build_dir" value="build/classes"/>
+    <property name="jar_dir" value="build/jar" />
+
     <target name="clean">
         <delete dir="build"/>
     </target>
 
     <target name="server">
-        <mkdir dir="build/server/classes"/>
-        <javac srcdir="server" destdir="build/server/classes"/>
-        <rmic classname="BagOfTask" base="build/server/classes"/>
+        <mkdir dir="${build_dir}"/>
+        <javac srcdir="${src_dir}/server" destdir="${build_dir}"/>
+        <rmic classname="server.BagOfTask" base="${build_dir}/"/>
     </target>
 
     <target name="client" depends="server">
-        <mkdir dir="build/client/classes"/>
-        <javac classpath="build/client/classes:." srcdir="client" destdir="build/client/classes"/>
+        <mkdir dir="${build_dir}"/>
+        <javac classpath="${build_dir}:." srcdir="${src_dir}/client" destdir="${build_dir}"/>
     </target>
 
     <target name="server-jar" depends="server">
-        <mkdir dir="build/server/jar"/>
-        <jar destfile="build/server/jar/${ant.project.name}-server.jar" basedir="build/server/classes">
+        <mkdir dir="${jar_dir}"/>
+        <jar destfile="${jar_dir}/${ant.project.name}-server.jar" basedir="${build_dir}">
             
             <manifest>
                 <attribute name="Main-Class" value="Serveur.java"/>
@@ -26,10 +30,10 @@
     </target>
 
     <target name="client-jar" depends="server">
-        <mkdir dir="build/client/jar"/>
-        <jar destfile="build/client/jar/${ant.project.name}-client.jar" basedir="build/client/classes">
-            <fileset dir="build/server/classes" includes="*Stub*"/>
-            <fileset dir="build/server/classes" includes="Client"/>
+        <mkdir dir="${jar_dir}"/>
+        <jar destfile="${jar_dir}/${ant.project.name}-client.jar" basedir="${build_dir}">
+            <fileset dir="${build_dir}" includes="*Stub*"/>
+            <fileset dir="${build_dir}" includes="Client"/>
             <manifest>
                 <attribute name="Main-Class" value="Client"/>
             </manifest>
@@ -37,10 +41,10 @@
     </target>
 
     <target name="run-server" depends="server-jar">
-        <java classpath="." jar="build/server/jar/${ant.project.name}-server.jar" fork="true"/>
+        <java classpath="." jar="${jar_dir}/${ant.project.name}-server.jar" fork="true"/>
     </target>
     
     <target name="run-client" depends="client-jar">
-        <java jar="build/client/jar/${ant.project.name}-client.jar" fork="true"/>
+        <java jar="${jar_dir}/${ant.project.name}-client.jar" fork="true"/>
     </target>
 </project>

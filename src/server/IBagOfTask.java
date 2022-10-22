@@ -4,7 +4,7 @@ import java.rmi.*;
 import java.sql.ResultSet;
 
 public interface IBagOfTask extends Remote {
-    // commandes client
+    // commandes src.client
     public void submitTask(ITask t) throws RemoteException;
 
     public ResultSet getResult(ITask t) throws RemoteException;

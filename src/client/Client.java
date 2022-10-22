@@ -1,25 +1,12 @@
+package client;
+
 import server.IBagOfTask;
 import server.ICompte;
-
 import java.io.*;
 import java.rmi.*;
-public class Client {
 
-    public Compte getCompte(int id) throws RemoteException {
-        if (liste.get(id) == null) {
-            System.out.println("Création de compte ... ");
-            liste.put(id, new Compte());
-            try {
-                Statement statement = connexionPool.getConnection();
-                ResultSet resultSet = statement.executeQuery("INSERT INTO COMPTE(id, SOLDE) VALUES (" + id + ", 0)");
-                connexionPool.setConnection(statement);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return liste.get(id);
-    }
-    
+
+public class Client {
     public static void main(String args[])
     {
         IBagOfTask srv = null;
@@ -118,7 +105,7 @@ public class Client {
                 System.out.println("identifiant du compte: " + amount);
                 idCompte = amount;
                 try {
-                    compte = srv.getCompte(amount);
+                    //compte = srv.getCompte(amount);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -128,7 +115,7 @@ public class Client {
             {
                 try {
                     idCompte = Integer.parseInt(str.substring(11));
-                    compte = srv.getCompte(idCompte);
+                    //compte = srv.getCompte(idCompte);
                 }
                 catch(Exception e)
                 {

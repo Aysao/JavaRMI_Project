@@ -5,7 +5,7 @@
 L'objectif est de soumettre, à partir de clients multiples, des requêtes à un système qui va les exécuter
 en parallèle sur un ou plusieurs SGBD. On commencera avec un seul SGBD.
 Les clients envoient à un objet distribué des requêtes SQL dont la durée d'exécution peut être longue.
-L'objet distribué va les répartir à des workers qui ensuite font un call-back vers le client pour lui délivrer les résultats.
+L'objet distribué va les répartir à des workers qui ensuite font un call-back vers le src.client pour lui délivrer les résultats.
 
 ### Questions:
 
@@ -16,23 +16,23 @@ L'objet distribué va les répartir à des workers qui ensuite font un call-back
 
 ## Commandes de build
 
-Compiler le client: `ant client-jar`
+Compiler le src.client: `ant src.client-jar`
 
-Compiler le serveur: `ant server-jar`
+Compiler le serveur: `ant src.server-jar`
 
 ## Commandes d'exécution
 
-Lancer le serveur: `ant run-server`
+Lancer le serveur: `ant run-src.server`
 
-Lancer le client: `ant run-client`
+Lancer le src.client: `ant run-src.client`
 
 Client : génère task avec code SQL, l'envoie au bag of tasks
 BOT : Affecte une connection à la tâche et la met dans la liste des taches à faire
 Worker: Récupère la tâche et l'exécute
-Worker: renvoie un message au bag of task ? ou au client direct ?
+Worker: renvoie un message au bag of task ? ou au src.client direct ?
 
 
-[ ] Refonte du client
-[ ] Vérifier commandes client bag of tasks*
+[ ] Refonte du src.client
+[ ] Vérifier commandes src.client bag of tasks*
 [ ] refaire le worker
 [ ] sortir un jeu de test
