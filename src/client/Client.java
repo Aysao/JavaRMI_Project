@@ -1,6 +1,7 @@
 package client;
 
 import server.IBagOfTask;
+import server.Task;
 
 import java.io.*;
 import java.rmi.*;
@@ -45,9 +46,48 @@ public class Client {
             {
                 help();
             }
-            else if (str.contains("/execute")) {
                 //trouver comment saisir une commande SQL ?
                 //ou proposer des commandes prédéfinies ?
+            else if (str.contains("/Connexion")) {
+                System.out.println("Entrer votre identifiant : ");
+                try{
+                    str = input.readLine();
+                    Task t = new Task("SELECT * FROM COMPTE WHERE ID='"+str+"'");
+                    srv.submitTask(t);
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+                
+            }
+
+            else if (str.contains("/Inscription")) {
+                System.out.println("Entrer votre identifiant : ");
+                try{
+                    str = input.readLine();
+                    Task t = new Task("INSERT INTO COMPTE VALUES ('"+str+"')");
+                    srv.submitTask(t);
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+                
+            }
+
+            else if (str.contains("/Suppression")) {
+                System.out.println("Entrer votre identifiant : ");
+                try{
+                    str = input.readLine();
+                    Task t = new Task("DELETE FROM COMPTE WHERE ID='"+str+"')");
+                    srv.submitTask(t);
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+                
             }
 
         }
@@ -56,5 +96,7 @@ public class Client {
     public static void help()
     {
         System.out.println("/quit");
+        System.out.println("/Connexion");
+        System.out.println("/Create");
     }
 }
