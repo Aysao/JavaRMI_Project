@@ -5,6 +5,7 @@ import server.Task;
 
 import java.io.*;
 import java.rmi.*;
+import java.sql.ResultSet;
 
 import static server.Serveur.SRV_NAME;
 
@@ -52,8 +53,14 @@ public class Client {
                 System.out.println("Entrer votre identifiant : ");
                 try{
                     str = input.readLine();
-                    Task t = new Task("SELECT * FROM COMPTE WHERE ID='"+str+"'");
-                    srv.submitTask(t);
+                    Task t = new Task("SELECT * FROM COMPTE WHERE compte='"+str+"'");
+                    int nTask = srv.submitTask(t);
+                    ResultSet resultat = srv.getResult(nTask);
+                    while(resultat.next())
+                    {
+                        System.out.println("Id unique : " + resultat.getInt("_id"));
+                        System.out.println("Nom de compte : "+resultat.getString("compte"));
+                    }
                 }
                 catch(Exception e)
                 {
@@ -67,7 +74,8 @@ public class Client {
                 try{
                     str = input.readLine();
                     Task t = new Task("INSERT INTO COMPTE VALUES ('"+str+"')");
-                    srv.submitTask(t);
+                    int nTask = srv.submitTask(t);
+                    System.out.println("Inscription réussie...");
                 }
                 catch(Exception e)
                 {
@@ -80,8 +88,9 @@ public class Client {
                 System.out.println("Entrer votre identifiant : ");
                 try{
                     str = input.readLine();
-                    Task t = new Task("DELETE FROM COMPTE WHERE ID='"+str+"')");
+                    Task t = new Task("DELETE FROM COMPTE WHERE compte='"+str+"')");
                     srv.submitTask(t);
+                    System.out.println("Suppresion réussie...");
                 }
                 catch(Exception e)
                 {
