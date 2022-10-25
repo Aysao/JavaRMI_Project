@@ -2,10 +2,7 @@ package server;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
@@ -27,11 +24,14 @@ public class    BagOfTask extends UnicastRemoteObject implements IBagOfTask {
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
+            System.out.println("[INFO] Driver loaded");
             Connection con = DriverManager.getConnection("jdbc:oracle:thin:@eluard:1521:ense2022", "mj662957",
                     "mj662957");
+            System.out.println("[INFO] Connected to DB");
             for (int i = 0; i < MAX_CONNECTIONS; i++) {
                 connexionPool.add(con.createStatement());
             }
+            System.out.println("[INFO] created " + MAX_CONNECTIONS + " connections");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,13 +42,13 @@ public class    BagOfTask extends UnicastRemoteObject implements IBagOfTask {
         if (connexionPool.isEmpty()) {
             t.setID(taskCounter);
             waitingConnection.addLast(t);
-            System.out.println("task waiting for connection. in waiting queue: " + waitingConnection.size());
+            System.out.println("[INFO] task waiting for connection. in waiting queue: " + waitingConnection.size());
         }
         else {
             t.setConnection(connexionPool.pop());
             t.setID(taskCounter);
             tasks.addLast(t);
-            System.out.println("added task. in queue: " + tasks.size());
+            System.out.println("[INFO] task ready. in queue: " + tasks.size());
         }
         return taskCounter;
     }
@@ -61,7 +61,7 @@ public class    BagOfTask extends UnicastRemoteObject implements IBagOfTask {
     }
 
     public ITask getNext() {
-        System.out.println("task sent to worker");
+        System.out.println("[INFO] task dispatched");
         return tasks.pop();
     }
 

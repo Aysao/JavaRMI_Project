@@ -16,26 +16,43 @@
 
     <target name="client" depends="server">
         <mkdir dir="${build_dir}"/>
-        <javac classpath="${build_dir}:." srcdir="${src_dir}/client" destdir="${build_dir}"/>
+        <javac srcdir="${src_dir}/client" destdir="${build_dir}"/>
     </target>
 
     <target name="server-jar" depends="server">
         <mkdir dir="${jar_dir}"/>
+        <copy file="lib/ojdbc6.jar" todir="build/jar/" />
         <jar destfile="${jar_dir}/${ant.project.name}-server.jar" basedir="${build_dir}">
-            
+            <fileset dir="lib" includes="*.jar" />
+            <fileset dir="${build_dir}" includes="server/*.class"/>
             <manifest>
-                <attribute name="Main-Class" value="Serveur.java"/>
+                <attribute name="Main-Class" value="server.Serveur"/>
+                <attribute name="Class-Path" value="./ojdbc6.jar" />
             </manifest>
         </jar>
     </target>
 
-    <target name="client-jar" depends="server">
+    <target name="client-jar" depends="client">
         <mkdir dir="${jar_dir}"/>
         <jar destfile="${jar_dir}/${ant.project.name}-client.jar" basedir="${build_dir}">
             <fileset dir="${build_dir}" includes="*Stub*"/>
             <fileset dir="${build_dir}" includes="Client"/>
+            <fileset dir="lib" includes="*.jar" />
             <manifest>
-                <attribute name="Main-Class" value="Client"/>
+                <attribute name="Main-Class" value="client.Client"/>
+                <attribute name="Class-Path" value="./ojdbc6.jar" />
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="worker-jar" depends="server">
+        <mkdir dir="${jar_dir}"/>
+        <jar destfile="${jar_dir}/${ant.project.name}-worker.jar" basedir="${build_dir}">
+            <fileset dir="lib" includes="*.jar" />
+            <fileset dir="${build_dir}" includes="server/*.class"/>
+            <manifest>
+                <attribute name="Main-Class" value="server.Worker"/>
+                <attribute name="Class-Path" value="./ojdbc6.jar" />
             </manifest>
         </jar>
     </target>
@@ -46,5 +63,9 @@
     
     <target name="run-client" depends="client-jar">
         <java jar="${jar_dir}/${ant.project.name}-client.jar" fork="true"/>
+    </target>
+
+    <target name="run-worker" depends="worker-jar">
+        <java jar="${jar_dir}/${ant.project.name}-worker.jar" fork="true"/>
     </target>
 </project>

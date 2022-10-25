@@ -2,10 +2,11 @@
 
 package server;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public interface ITask {
+public interface ITask extends Serializable {
     public void execute();
 
     public ResultSet getResult();

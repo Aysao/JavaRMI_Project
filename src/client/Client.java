@@ -1,6 +1,7 @@
 package client;
 
 import server.IBagOfTask;
+import server.ITask;
 import server.Task;
 
 import java.io.*;
@@ -73,7 +74,7 @@ public class Client {
                 System.out.println("Entrer votre identifiant : ");
                 try{
                     str = input.readLine();
-                    Task t = new Task("INSERT INTO COMPTE VALUES ('"+str+"')");
+                    ITask t = new Task("INSERT INTO COMPTE VALUES ('"+str+"')");
                     int nTask = srv.submitTask(t);
                     System.out.println("Inscription réussie...");
                 }

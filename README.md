@@ -38,3 +38,4 @@ Worker: renvoie un message au bag of task ? ou au client direct ?
 [x] Vérifier commandes client bag of tasks
 [x] refaire le worker
 [ ] sortir un jeu de test
+[ ] installer driver JDBC Oracle

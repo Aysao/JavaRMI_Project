@@ -12,7 +12,7 @@ public class Serveur
             IBagOfTask srv = new BagOfTask();
             String nom = SRV_NAME;
             Naming.rebind(nom, srv);
-            System.out.println("--- serveur enregistré ---");
+            System.out.println("[INFO] Server registered to RMI");
 
         }
         catch (Exception e)
