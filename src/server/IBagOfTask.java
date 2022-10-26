@@ -1,17 +1,19 @@
 package server;
 
+import javax.sql.rowset.CachedRowSet;
 import java.rmi.*;
 import java.sql.ResultSet;
 
 public interface IBagOfTask extends Remote {
     // commandes client
-    int submitTask(ITask t) throws RemoteException;
-    ResultSet getResult(int ID) throws RemoteException;
+    public int submitTask(ITask t) throws RemoteException;
+    public CachedRowSet getResult(int ID) throws RemoteException;
+    public boolean isTaskCompleted(int taskID) throws RemoteException;
 
     // Commandes Worker
-    ITask getNext() throws RemoteException;
+    public ITask getNext() throws RemoteException;
 
-    void giveResult(ITask t) throws RemoteException;
+    public void giveResult(ITask t) throws RemoteException;
 
-    boolean hasTaskAvailable() throws RemoteException;
+    public boolean hasTaskAvailable() throws RemoteException;
 }

@@ -2,16 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c57a550c-2a81-4577-a461-f793652ffc96" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ant.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ant.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/BagOfTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/BagOfTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/IBagOfTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/IBagOfTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ITask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ITask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/Serveur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Serveur.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Worker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,10 +51,17 @@
     &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.rmicompiler&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
-  <component name="RunManager" selected="JAR Application.BagOfTasks-server.jar">
+  <component name="RunManager" selected="Application.Client">
+    <configuration name="Client" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="server.Client" />
+      <module name="JavaRMI_Project" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BagOfTasks-client.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/build/jar/BagOfTasks-client.jar" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -69,6 +74,7 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.Client" />
       <item itemvalue="JAR Application.BagOfTasks-server.jar" />
       <item itemvalue="JAR Application.BagOfTasks-client.jar" />
     </list>
@@ -93,7 +99,19 @@
       <workItem from="1666471399920" duration="4648000" />
       <workItem from="1666555599611" duration="1414000" />
       <workItem from="1666729064758" duration="5323000" />
+      <workItem from="1666735229414" duration="61000" />
+      <workItem from="1666807510111" duration="2015000" />
+      <workItem from="1666809681282" duration="1934000" />
+      <workItem from="1666813094354" duration="4252000" />
     </task>
+    <task id="LOCAL-00001" summary="Tests commencés:">
+      <created>1666735261761</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1666735261761</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,5 +119,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Tests commencés:" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests commencés:" />
   </component>
 </project>

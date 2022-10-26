@@ -14,6 +14,7 @@ import static server.Serveur.SRV_NAME;
 
 public class Worker extends Thread{
     IBagOfTask bot = null;
+    int awaitDelay = 500;
     public Worker() {
         try {
             this.bot = (IBagOfTask) Naming.lookup(SRV_NAME);
@@ -37,10 +38,12 @@ public class Worker extends Thread{
                             bot.giveResult(t);
                             System.out.println("callback sent");
                         }
+                        this.awaitDelay = 500; //reset
                     }
                     else {
-                        System.out.println("Awaiting server");
-                        sleep(500);
+                        System.out.println("Awaiting server. delay: " + awaitDelay + " ms");
+                        sleep(awaitDelay);
+                        awaitDelay *= 2;
                     }
                 }catch(Exception e) {
                     e.printStackTrace();

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="BagOfTasks" basedir=".">
+    <property name="ant.build.javac.source" value="1.8"/>
+    <property name="ant.build.javac.target" value="1.8"/>
     <property name="src_dir" value="src" />
     <property name="build_dir" value="build/classes"/>
     <property name="jar_dir" value="build/jar" />
@@ -11,7 +13,7 @@
     <target name="server">
         <mkdir dir="${build_dir}"/>
         <javac srcdir="${src_dir}/server" destdir="${build_dir}"/>
-        <rmic classname="server.BagOfTask" base="${build_dir}/"/>
+        <!-- <rmic classname="server.BagOfTask" base="${build_dir}/"/> -->
     </target>
 
     <target name="client" depends="server">
@@ -23,8 +25,7 @@
         <mkdir dir="${jar_dir}"/>
         <copy file="lib/ojdbc6.jar" todir="build/jar/" />
         <jar destfile="${jar_dir}/${ant.project.name}-server.jar" basedir="${build_dir}">
-            <fileset dir="lib" includes="*.jar" />
-            <fileset dir="${build_dir}" includes="server/*.class"/>
+            <fileset dir="${build_dir}" includes="**/*"/>
             <manifest>
                 <attribute name="Main-Class" value="server.Serveur"/>
                 <attribute name="Class-Path" value="./ojdbc6.jar" />
@@ -35,11 +36,10 @@
     <target name="client-jar" depends="client">
         <mkdir dir="${jar_dir}"/>
         <jar destfile="${jar_dir}/${ant.project.name}-client.jar" basedir="${build_dir}">
-            <fileset dir="${build_dir}" includes="*Stub*"/>
-            <fileset dir="${build_dir}" includes="Client"/>
-            <fileset dir="lib" includes="*.jar" />
+            <!--<fileset dir="${build_dir}" includes="**/*Stub*"/> -->
+            <fileset dir="${build_dir}" includes="server/*.class"/>
             <manifest>
-                <attribute name="Main-Class" value="client.Client"/>
+                <attribute name="Main-Class" value="server.Client"/>
                 <attribute name="Class-Path" value="./ojdbc6.jar" />
             </manifest>
         </jar>
