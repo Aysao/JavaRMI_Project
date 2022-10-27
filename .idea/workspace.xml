@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c57a550c-2a81-4577-a461-f793652ffc96" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/DOC/Fedora.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DOC/Protocole.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DOC/Table SQL.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BagOfTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BagOfTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Worker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,6 +107,7 @@
       <workItem from="1666809681282" duration="1934000" />
       <workItem from="1666813094354" duration="4252000" />
       <workItem from="1666887208873" duration="5412000" />
+      <workItem from="1666894810370" duration="886000" />
     </task>
     <task id="LOCAL-00001" summary="Tests commencés:">
       <created>1666735261761</created>

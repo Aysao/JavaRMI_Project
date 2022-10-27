@@ -20,6 +20,7 @@ public class Client {
             System.exit(1);
         }
 
+
         boolean stop = false;
 
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -27,7 +28,7 @@ public class Client {
         {
             System.out.println("[==================================================]");
             System.out.println("[INFO] Utilisez /help pour avoir une liste des commandes disponibles");
-            
+
             String str = "";
             try{
                 str = input.readLine();
@@ -136,7 +137,7 @@ public class Client {
                 {
                     e.printStackTrace();
                 }
-                
+
             }
             else if (str.contains("/suppression")) {
                 System.out.println("Entrez l'identifiant unique du compte à supprimer : ");
@@ -151,7 +152,7 @@ public class Client {
                 {
                     e.printStackTrace();
                 }
-                
+
             }
 
         }
