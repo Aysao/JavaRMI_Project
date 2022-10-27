@@ -7,17 +7,14 @@
  * retourne le résultat via callback
  */
 
-package server;
 import java.rmi.Naming;
-
-import static server.Serveur.SRV_NAME;
 
 public class Worker extends Thread{
     IBagOfTask bot = null;
     int awaitDelay = 500;
     public Worker() {
         try {
-            this.bot = (IBagOfTask) Naming.lookup(SRV_NAME);
+            this.bot = (IBagOfTask) Naming.lookup(Serveur.SRV_NAME);
         }
         catch(Exception e) {
             e.printStackTrace();

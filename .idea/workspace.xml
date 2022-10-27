@@ -4,12 +4,13 @@
     <list default="true" id="c57a550c-2a81-4577-a461-f793652ffc96" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/BagOfTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/BagOfTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/IBagOfTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/IBagOfTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ITask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ITask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Worker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/BagOfTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BagOfTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/IBagOfTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IBagOfTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/ITask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ITask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Serveur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Serveur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Worker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,9 +55,14 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="server.Client" />
+      <option name="MAIN_CLASS_NAME" value="Client" />
       <module name="JavaRMI_Project" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -103,6 +109,7 @@
       <workItem from="1666807510111" duration="2015000" />
       <workItem from="1666809681282" duration="1934000" />
       <workItem from="1666813094354" duration="4252000" />
+      <workItem from="1666887208873" duration="349000" />
     </task>
     <task id="LOCAL-00001" summary="Tests commencés:">
       <created>1666735261761</created>

@@ -1,5 +1,3 @@
-package server;
-
 import javax.sql.rowset.*;
 import java.sql.*;
 

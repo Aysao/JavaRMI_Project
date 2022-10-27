@@ -1,16 +1,8 @@
-package server;
-
-import server.IBagOfTask;
-import server.ITask;
-import server.Task;
-
 import javax.sql.rowset.CachedRowSet;
 import java.io.*;
 import java.rmi.*;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import static server.Serveur.SRV_NAME;
 
 
 public class Client {
@@ -20,7 +12,7 @@ public class Client {
         ArrayList<Integer> taskList = new ArrayList<Integer>();
 
         try{
-            srv = (IBagOfTask) Naming.lookup(SRV_NAME);
+            srv = (IBagOfTask) Naming.lookup(Serveur.SRV_NAME);
         }catch(Exception e)
         {
             System.err.println("Erreur, impossible de trouver le serveur | " + e);

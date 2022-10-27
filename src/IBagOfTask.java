@@ -1,8 +1,5 @@
-package server;
-
 import javax.sql.rowset.CachedRowSet;
 import java.rmi.*;
-import java.sql.ResultSet;
 
 public interface IBagOfTask extends Remote {
     // commandes client

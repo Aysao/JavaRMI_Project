@@ -1,7 +1,5 @@
 //TODO: faire l'interface de la tâche pour les workers
 
-package server;
-
 import javax.sql.rowset.CachedRowSet;
 import java.io.Serializable;
 import java.sql.ResultSet;

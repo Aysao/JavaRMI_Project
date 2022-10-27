@@ -1,13 +1,9 @@
-package server;
-
 import javax.sql.rowset.CachedRowSet;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class BagOfTask extends UnicastRemoteObject implements IBagOfTask {
     private Deque<ITask> tasks;
