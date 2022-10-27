@@ -34,8 +34,14 @@ Worker: Récupère la tâche et l'exécute
 Worker: renvoie un message au bag of task ? ou au client direct ?
 
 
-[ ] Refonte du client
+[x] Refonte du client
 [x] Vérifier commandes client bag of tasks
 [x] refaire le worker
 [ ] sortir un jeu de test
-[ ] installer driver JDBC Oracle
+[x] installer driver JDBC Oracle
+
+
+## Structure de la table
+
+id NUMBER
+IDENTIFIANT VARCHAR(20)

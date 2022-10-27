@@ -2,7 +2,7 @@ import javax.sql.rowset.CachedRowSet;
 import java.io.*;
 import java.rmi.*;
 import java.util.ArrayList;
-
+import java.util.Random;
 
 
 public class Client {
@@ -10,6 +10,7 @@ public class Client {
     {
         IBagOfTask srv = null;
         ArrayList<Integer> taskList = new ArrayList<Integer>();
+        Random r = new Random();
 
         try{
             srv = (IBagOfTask) Naming.lookup(Serveur.SRV_NAME);
@@ -25,6 +26,7 @@ public class Client {
         while (!stop)
         {
             System.out.println("[==================================================]");
+            System.out.println("[INFO] Utilisez /help pour avoir une liste des commandes disponibles");
             
             String str = "";
             try{
@@ -43,7 +45,7 @@ public class Client {
             {
                 help();
             }
-            else if (str.contains("/test")) {
+            else if (str.contains("/testconnection")) {
                 try {
                     boolean out = srv.hasTaskAvailable();
                     System.out.println(out);
@@ -52,24 +54,14 @@ public class Client {
                     e.printStackTrace();
                 }
             }
-                //trouver comment saisir une commande SQL ?
-                //ou proposer des commandes prédéfinies ?
             else if (str.contains("/connexion")) {
                 System.out.println("Entrez votre identifiant : ");
                 try{
                     str = input.readLine();
-                    Task t = new Task("SELECT * FROM COMPTE WHERE compte='"+str+"'");
-                    System.out.println(t.toString());
+                    Task t = new Task("SELECT * FROM COMPTE WHERE login='"+str+"'");
                     int nTask = srv.submitTask(t);
                     taskList.add(nTask);
-                    CachedRowSet resultat = srv.getResult(nTask);
-                    //TODO: mettre a jour la lecture des résultats
-                    while(resultat.next())
-                    {
-                        System.out.println("Id unique : " + resultat.getInt("_id"));
-                        System.out.println("Nom de compte : "+resultat.getString("compte"));
-                    }
-                    taskList.remove(nTask);
+                    System.out.println("Commande " + nTask + " envoyée au serveur. utilisez /checkresult pour avoir les résultats");
                 }
                 catch(Exception e)
                 {
@@ -78,14 +70,13 @@ public class Client {
             }
             //pour créer une tâche SQL générique
             else if (str.contains("/createtask")) {
-                System.out.println("Write your SQL command:");
+                System.out.println("Entrez une commande SQL:");
                 try {
                     String command = input.readLine();
                     Task t = new Task(command);
                     int nTask = srv.submitTask(t);
                     taskList.add(nTask);
-                    System.out.println("Task submitted to server successfully");
-
+                    System.out.println("Commande " + nTask + " envoyée au serveur. utilisez /checkresult pour avoir les résultats");
                 }
                 catch(Exception e) {
                     e.printStackTrace();
@@ -104,13 +95,13 @@ public class Client {
                             //TODO: mettre a jour la lecture des résultats
                             while(resultat.next())
                             {
-                                System.out.println("Id unique : " + resultat.getInt("_id"));
-                                System.out.println("Nom de compte : "+resultat.getString("compte"));
+                                System.out.println("Id unique : " + resultat.getInt("id"));
+                                System.out.println("Nom de compte : "+resultat.getString("login"));
                             }
-                            taskList.remove(nTask);
+                            taskList.remove((Object) nTask); //sinon le considère comme un index
                         }
                         else {
-                            System.out.println(" Task not completed, please try again later");
+                            System.out.println("commande toujours en cours de traitement, réessayez plus tard");
                         }
                     }
                     catch(Exception e) {
@@ -118,28 +109,28 @@ public class Client {
                     }
                 }
                 else {
-                    System.out.println("Invalid task number");
+                    System.out.println("Numéro de commande invalide");
                 }
             }
 
             //pour lister toutes les tâches en cours d'exécution.
             else if (str.contains("/tasks")) {
-                System.out.println("Current active tasks: ");
+                System.out.println("Commandes en cours de traitement: ");
                 for (int taskID : taskList) {
                     System.out.println(taskID);
                 }
                 System.out.println("----");
             }
 
-            else if (str.contains("/Inscription")) {
-                System.out.println("Entrer votre identifiant : ");
+            else if (str.contains("/inscription")) {
+                System.out.println("Entrez votre identifiant : ");
                 try{
-                    str = input.readLine();
-                    ITask t = new Task("INSERT INTO COMPTE VALUES ('"+str+"')");
-                    System.out.println(t);
-                    System.out.println(srv);
+                    String login = input.readLine();
+                    int id = r.nextInt();
+                    ITask t = new Task("INSERT INTO COMPTE VALUES ("+id+", '"+login+"')");
                     int nTask = srv.submitTask(t);
-                    System.out.println("Inscription réussie...");
+                    taskList.add(nTask);
+                    System.out.println("Commande " + nTask + " envoyée au serveur. utilisez /checkresult pour avoir les résultats");
                 }
                 catch(Exception e)
                 {
@@ -147,14 +138,14 @@ public class Client {
                 }
                 
             }
-
-            else if (str.contains("/Suppression")) {
-                System.out.println("Entrer votre identifiant : ");
+            else if (str.contains("/suppression")) {
+                System.out.println("Entrez l'identifiant unique du compte à supprimer : ");
                 try{
                     str = input.readLine();
-                    Task t = new Task("DELETE FROM COMPTE WHERE compte='"+str+"')");
-                    srv.submitTask(t);
-                    System.out.println("Suppresion réussie...");
+                    Task t = new Task("DELETE FROM COMPTE WHERE id='"+str+"'");
+                    int nTask = srv.submitTask(t);
+                    taskList.add(nTask);
+                    System.out.println("Commande " + nTask + " envoyée au serveur. utilisez /checkresult pour avoir les résultats");
                 }
                 catch(Exception e)
                 {
@@ -168,8 +159,13 @@ public class Client {
 
     public static void help()
     {
-        System.out.println("/quit");
-        System.out.println("/Connexion");
-        System.out.println("/Create");
+        System.out.println("Commandes disponibles: ");
+        System.out.println("/quit => Quitter le client");
+        System.out.println("/connexion => récupérer un compte");
+        System.out.println("/inscription => créer un compte");
+        System.out.println("/suppression => supprimer un compte");
+        System.out.println("/createtask => saisir une commande SQL");
+        System.out.println("/tasks => lister les commandes en cours de traitement");
+        System.out.println("/checkresult <task> => vérifier l'avancement d'une tâche et récupérer le résultat si disponible");
     }
 }

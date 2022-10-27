@@ -21,7 +21,6 @@ public class BagOfTask extends UnicastRemoteObject implements IBagOfTask {
     }
 
     public int submitTask(ITask t) throws RemoteException {
-        System.out.println("test");
         taskCounter++;
         t.setID(taskCounter);
         t.setParameters(this.URL, this.UID, this.password);

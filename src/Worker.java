@@ -40,7 +40,7 @@ public class Worker extends Thread{
                     else {
                         System.out.println("Awaiting server. delay: " + awaitDelay + " ms");
                         sleep(awaitDelay);
-                        awaitDelay *= 2;
+                        awaitDelay *= 1.25;
                     }
                 }catch(Exception e) {
                     e.printStackTrace();
