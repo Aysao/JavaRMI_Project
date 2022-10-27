@@ -23,14 +23,6 @@ public class Task implements ITask {
     public void setID(int ID) { this.ID = ID;}
     public int getID() {return this.ID;}
 
-    private void createConnection() throws ClassNotFoundException, SQLException {
-
-    }
-
-    private void destroyConnection() throws SQLException {
-
-    }
-
     public void execute() {
         try {
             System.out.println("Begin task execution");
